@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#5267e8">
+    <title>TimeWise - Student Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <a href="#home" class="brand">⏰ TimeWise<span>.</span></a>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#planner">Planner</a>
+        <a href="#tips">Tips</a>
+    </nav>
+    <button id="themeToggle" class="theme-button">🌙</button>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="eyebrow">YOUR DAILY PRODUCTIVITY PARTNER</span>
+            <h1>Make Every<br><span>Second Count.</span></h1>
+            <p>
+                Atur waktu dengan lebih cerdas, kelola tugas,
+                dan jadikan setiap harimu lebih produktif.
+            </p>
+            <a href="#planner" class="button-primary">Buat Jadwal Sekarang ↗</a>
+        </div>
+        <div class="hero-art">
+            <div class="art-circle">📅</div>
+            <div class="floating-note">✨ Stay Productive!</div>
+        </div>
+    </section>
+
+    <section class="welcome section" id="dashboard">
+        <div>
+            <span class="eyebrow">PERSONAL DASHBOARD</span>
+            <h2 id="greeting">Selamat datang!</h2>
+            <p id="todayDate"></p>
+        </div>
+        <div class="digital-clock">
+            <span>WAKTU SEKARANG</span>
+            <strong id="clock">00:00:00</strong>
+        </div>
+    </section>
+
+    <section class="stats section">
+        <div class="stat-card">
+            <div class="stat-icon purple">📋</div>
+            <p>Total Tugas</p>
+            <h2 id="totalTasks">0</h2>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon green">✓</div>
+            <p>Tugas Selesai</p>
+            <h2 id="doneTasks">0</h2>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon orange">⌛</div>
+            <p>Belum Selesai</p>
+            <h2 id="pendingTasks">0</h2>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon blue">⚡</div>
+            <p>Produktivitas</p>
+            <h2 id="productivity">0%</h2>
+        </div>
+    </section>
+
+    <section class="section planner" id="planner">
+        <div class="section-title">
+            <div>
+                <span class="eyebrow">PLAN YOUR DAY</span>
+                <h2>My Daily Planner</h2>
+                <p>Susun kegiatanmu dan selesaikan satu per satu.</p>
+            </div>
+        </div>
+
+        <div class="planner-grid">
+            <div class="form-card">
+                <h3 id="formTitle">＋ Tambah Kegiatan</h3>
+                <form id="taskForm">
+                    <input type="hidden" id="taskId">
+
+                    <label for="taskName">Nama kegiatan</label>
+                    <input id="taskName" type="text"
+                        placeholder="Contoh: Belajar Geografi" required>
+
+                    <label for="taskDate">Tanggal kegiatan</label>
+                    <input id="taskDate" type="date" required>
+
+                    <label for="taskTime">Waktu</label>
+                    <input id="taskTime" type="time" required>
+
+                    <label for="taskCategory">Kategori</label>
+                    <select id="taskCategory">
+                        <option value="Sekolah">📚 Sekolah</option>
+                        <option value="Pribadi">🌷 Pribadi</option>
+                        <option value="Organisasi">🤝 Organisasi</option>
+                        <option value="Lainnya">✨ Lainnya</option>
+                    </select>
+
+                    <label for="taskPriority">Prioritas</label>
+                    <select id="taskPriority">
+                        <option value="Biasa">Biasa</option>
+                        <option value="Penting">Penting</option>
+                        <option value="Sangat Penting">Sangat Penting</option>
+                    </select>
+
+                    <button class="button-primary full" type="submit"
+                        id="saveButton">Simpan Kegiatan</button>
+
+                    <button class="cancel-button full" type="button"
+                        id="cancelEdit" hidden>Batal Edit</button>
+                </form>
+            </div>
+
+            <div class="list-card">
+                <div class="list-heading">
+                    <div>
+                        <h3>Daftar Kegiatan</h3>
+                        <p>Atur aktivitas harianmu.</p>
+                    </div>
+                    <span class="live-label">● LIVE</span>
+                </div>
+
+                <div class="filters">
+                    <button class="filter active" data-filter="all">Semua</button>
+                    <button class="filter" data-filter="pending">Aktif</button>
+                    <button class="filter" data-filter="done">Selesai</button>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-info">
+                        <strong>Progress Harian</strong>
+                        <strong id="progressPercent">0%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progressBar"></div>
+                    </div>
+                    <p id="progressDescription">Belum ada tugas selesai.</p>
+                </div>
+
+                <div id="taskList"></div>
+                <div id="emptyState" class="empty-state">
+                    <span>📝</span>
+                    <h3>Belum ada kegiatan</h3>
+                    <p>Tambahkan kegiatan pertamamu hari ini.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section tips" id="tips">
+        <div class="section-title center">
+            <span class="eyebrow">BE MORE PRODUCTIVE</span>
+            <h2>Tips Mengelola Waktu</h2>
+            <p>Kebiasaan kecil dapat membawa perubahan besar.</p>
+        </div>
+
+        <div class="tips-grid">
+            <article class="tip-card">
+                <span>📝</span>
+                <h3>Rencanakan Harimu</h3>
+                <p>Buat daftar kegiatan sebelum memulai aktivitas.</p>
+            </article>
+            <article class="tip-card">
+                <span>🎯</span>
+                <h3>Tentukan Prioritas</h3>
+                <p>Dahulukan tugas yang paling penting.</p>
+            </article>
+            <article class="tip-card">
+                <span>⏳</span>
+                <h3>Hindari Menunda</h3>
+                <p>Mulailah mengerjakan tugas tanpa menunggu nanti.</p>
+            </article>
+            <article class="tip-card">
+                <span>🌿</span>
+                <h3>Jaga Keseimbangan</h3>
+                <p>Luangkan waktu untuk belajar dan beristirahat.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <span>💡</span>
+        <h2>"The key is not to prioritize what's on your schedule, but to schedule your priorities."</h2>
+        <p>Atur prioritasmu, bukan hanya waktumu.</p>
+    </section>
+</main>
+
+<footer>
+    <h2>⏰ TimeWise.</h2>
+    <p>Manage Your Time, Create Your Future.</p>
+    <small>© 2026 TimeWise | Student Productivity Planner</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
